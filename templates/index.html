@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calidad del Vino</title>
+
+</head>
+<body class="row">
+    <div class="col s7 card">
+        <h4 class="header grey-text text-darken-3">Datos Nuevo Vino</h4>
+        <form class="card-content" action="/comparacion" method="POST">
+            <div class="row">
+                <div class="input-field col s3">
+                  <input id="fixed_acidity" name="fixed_acidity" type="text">
+                  <label for="fixed_acidity">Fixed Acidity</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="volatile_acidity" name="volatile_acidity" type="text" >
+                  <label for="volatile_acidity">Volatile Acidity</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="citric_acid" name="citric_acid" type="text" >
+                  <label for="citric_acid">Citric Acid</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="residual_sugar" name="residual_sugar" type="text" >
+                  <label for="residual_sugar">Residual Sugar</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="chlorides" name="chlorides" type="text" >
+                  <label for="chlorides">Chlorides</label>
+                </div>
+
+                <div class="input-field col s3">
+                  <input id="free_sulfur_dioxide" name="free_sulfur_dioxide" type="text">
+                  <label for="free_sulfur_dioxide">Free Sulfur Dioxide</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="total_sulfur_dioxide" name="total_sulfur_dioxide" type="text" >
+                  <label for="total_sulfur_dioxide">Volatile Acidity</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="density" name="density"  type="text">
+                  <label for="density">Density</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="pH" name="pH" type="text" >
+                  <label for="pH">PH</label>
+                </div>
+
+                <div class="input-field col s3">
+                  <input id="sulphates" name="sulphates" type="text">
+                  <label for="sulphates">Sulphates</label>
+                </div>
+                <div class="input-field col s3">
+                  <input id="alcohol" name="alcohol" type="text">
+                  <label for="alcohol">Alcohol</label>
+                </div>
+
+                <button class="btn waves-effect waves-light" type="submit" name="action">CALCULAR
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="col s5 card">
+        <h4 class="header grey-text text-darken-3">Tabla de Similitud</h4>
+        <div class="card-content" >
+            <table class="striped">
+                <thead>
+                  <tr>
+                      <th>Item</th>
+                      <th>Vino Calidad</th>
+                      <th>Vino Similitud</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in range(0, lista.__len__()) %}
+                  <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ lista[i].calidad }}</td>
+                    <td>{{ lista[i].similitud }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
