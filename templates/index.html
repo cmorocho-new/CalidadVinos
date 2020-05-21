@@ -3,87 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <title>Calidad del Vino</title>
+    <style>
+        .input-field {
+            border: 1px grey solid;
+            padding: 5px;
+        }
 
+        .content {
+            width: 500px;
+            float: left;
+            padding: 0 25px;
+        }
+
+        td, th{
+            text-align: center;
+            border: 1px grey solid;
+        }
+
+        tr.calidad > td {
+            border: 2px green solid;
+        }
+    </style>
 </head>
-<body class="row">
-    <div class="col s7 card">
-        <h4 class="header grey-text text-darken-3">Datos Nuevo Vino</h4>
-        <form class="card-content" action="/comparacion" method="POST">
-            <div class="row">
-                <div class="input-field col s3">
-                  <input id="fixed_acidity" name="fixed_acidity" type="text">
-                  <label for="fixed_acidity">Fixed Acidity</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="volatile_acidity" name="volatile_acidity" type="text" >
-                  <label for="volatile_acidity">Volatile Acidity</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="citric_acid" name="citric_acid" type="text" >
-                  <label for="citric_acid">Citric Acid</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="residual_sugar" name="residual_sugar" type="text" >
-                  <label for="residual_sugar">Residual Sugar</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="chlorides" name="chlorides" type="text" >
-                  <label for="chlorides">Chlorides</label>
-                </div>
-
-                <div class="input-field col s3">
-                  <input id="free_sulfur_dioxide" name="free_sulfur_dioxide" type="text">
-                  <label for="free_sulfur_dioxide">Free Sulfur Dioxide</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="total_sulfur_dioxide" name="total_sulfur_dioxide" type="text" >
-                  <label for="total_sulfur_dioxide">Volatile Acidity</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="density" name="density"  type="text">
-                  <label for="density">Density</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="pH" name="pH" type="text" >
-                  <label for="pH">PH</label>
-                </div>
-
-                <div class="input-field col s3">
-                  <input id="sulphates" name="sulphates" type="text">
-                  <label for="sulphates">Sulphates</label>
-                </div>
-                <div class="input-field col s3">
-                  <input id="alcohol" name="alcohol" type="text">
-                  <label for="alcohol">Alcohol</label>
-                </div>
-
-                <button class="btn waves-effect waves-light" type="submit" name="action">CALCULAR
-                </button>
+<body>
+    <div class="content">
+        <h4>DATOS NUEVO VINO</h4>
+        <form action="/calculo_similitud" method="POST">
+            <div class="input-field">
+                <label>Fixed Acidity</label>
+                <input name="fixed_acidity" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[0] if valores else '' }}">
             </div>
+            <div class="input-field">
+                <label>Volatile Acidity</label>
+                <input name="volatile_acidity" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[1] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Citric Acid</label>
+               <input name="citric_acid" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[2] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Residual Sugar</label>
+                <input name="residual_sugar" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[3] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Chlorides</label>
+                <input name="chlorides" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[4] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Free Sulfur Dioxide</label>
+                <input name="free_sulfur_dioxide" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[5] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Volatile Acidity</label>
+                <input name="total_sulfur_dioxide" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[6] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Density</label>
+                <input name="density" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[7] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>PH</label>
+                <input name="pH" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[8] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                 <label>Sulphates</label>
+                 <input name="sulphates" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[9] if valores else '' }}">
+            </div>
+            <div class="input-field">
+                <label>Alcohol</label>
+                <input name="alcohol" type="text" required="" pattern="([0-9]*\.)?[0-9]*" value="{{ valores[10] if valores else '' }}">
+            </div>
+            <button type="submit">CALCULAR</button>
         </form>
     </div>
-    <div class="col s5 card">
-        <h4 class="header grey-text text-darken-3">Tabla de Similitud</h4>
-        <div class="card-content" >
-            <table class="striped">
-                <thead>
-                  <tr>
-                      <th>Item</th>
-                      <th>Vino Calidad</th>
-                      <th>Vino Similitud</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for i in range(0, lista.__len__()) %}
-                  <tr>
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ lista[i].calidad }}</td>
-                    <td>{{ lista[i].similitud }}</td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="content">
+        <h4>TABLA DE SIMILIT5UDES</h4>
+        <table>
+            <thead>
+              <tr>
+                  <th width="100px">Item</th>
+                  <th width="100px">Vino Calidad</th>
+                  <th width="200px">Vino Similitud</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in range(0, lista.__len__()) %}
+              <tr class="{{ 'calidad' if i == 0 else '' }}">
+                <td>{{ i + 1 }}</td>
+                <td>{{ lista[i].calidad }}</td>
+                <td>{{ lista[i].similitud }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 
