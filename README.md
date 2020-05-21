@@ -1,2 +1,2 @@
 # CalidadVinos
-Python calcular la similutud de los vinos
+Python calcular la calidad de un vino segun las propiedad des mismo, utilizando el calculo de jaccard
